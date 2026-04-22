@@ -13,23 +13,29 @@
 [ext_resource type="Texture2D" uid="uid://dqr6yyxpaj7py" path="res://assets/Tiles/tile_0025.png" id="11_fjyoi"]
 [ext_resource type="Texture2D" uid="uid://ckuvlt2u0t5ry" path="res://assets/Tiles/tile_0024.png" id="12_hltnu"]
 [ext_resource type="Script" uid="uid://gq2opvy258c2" path="res://maps/iarba.gd" id="13_o3xq8"]
+[ext_resource type="PackedScene" uid="uid://cw83fpbv25e3h" path="res://player.tscn" id="14_0lttj"]
 [ext_resource type="Script" uid="uid://cl28o1qquhy4v" path="res://maps/camera_2d.gd" id="14_fiknj"]
+[ext_resource type="Texture2D" uid="uid://c7q1d5p2w8kej" path="res://assets/Tiles/Characters/tile_0000.png" id="16_gjikb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xbqh"]
 texture = ExtResource("1_t45sv")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_52hco"]
 texture = ExtResource("2_fiknj")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6vie"]
 texture = ExtResource("3_0lttj")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wbu7v"]
 texture = ExtResource("4_gjikb")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l22sv"]
 texture = ExtResource("5_i2vvo")
@@ -37,36 +43,45 @@ texture = ExtResource("5_i2vvo")
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g45su"]
 texture = ExtResource("6_vseyj")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lka15"]
 texture = ExtResource("7_6vres")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5lb72"]
 texture = ExtResource("8_4qfh8")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3bfqw"]
 texture = ExtResource("9_1r1bg")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyyrh"]
 texture = ExtResource("10_8o5wg")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4e54n"]
 texture = ExtResource("5_i2vvo")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_66rxd"]
 texture = ExtResource("11_fjyoi")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mtle3"]
 texture = ExtResource("12_hltnu")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_fo5xs"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7xbqh")
 sources/1 = SubResource("TileSetAtlasSource_52hco")
 sources/2 = SubResource("TileSetAtlasSource_g45su")
@@ -81,13 +96,27 @@ sources/10 = SubResource("TileSetAtlasSource_k6vie")
 sources/11 = SubResource("TileSetAtlasSource_wbu7v")
 sources/12 = SubResource("TileSetAtlasSource_l22sv")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0lttj"]
+
 [node name="Map1" type="Node2D" unique_id=2053901344]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=499654520]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=499654520 node_paths=PackedStringArray("player")]
 tile_set = SubResource("TileSet_fo5xs")
 script = ExtResource("13_o3xq8")
+player = NodePath("../Player")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1661380838]
+[node name="Player" parent="." unique_id=2119059682 instance=ExtResource("14_0lttj")]
+z_index = 1
+position = Vector2(151, 266)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1661380838]
+position = Vector2(-151, -266)
 offset = Vector2(400, 200)
 zoom = Vector2(2, 2)
 script = ExtResource("14_fiknj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Player" unique_id=1499919361]
+shape = SubResource("CapsuleShape2D_0lttj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player" unique_id=72452573]
+texture = ExtResource("16_gjikb")
