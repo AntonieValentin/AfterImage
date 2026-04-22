@@ -1,13 +1,15 @@
 [gd_scene format=3 uid="uid://cw83fpbv25e3h"]
 
 [ext_resource type="Script" uid="uid://chxd600oq0yno" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://c7q1d5p2w8kej" path="res://assets/Tiles/Characters/tile_0000.png" id="2_onrkg"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
 
 [node name="Player" type="CharacterBody2D" unique_id=2119059682]
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1747507603]
-shape = SubResource("CapsuleShape2D_onrkg")
+shape = SubResource("CircleShape2D_i3pqv")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=806389913]
+texture = ExtResource("2_onrkg")
