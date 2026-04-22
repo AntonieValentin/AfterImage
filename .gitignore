@@ -1,0 +1,7 @@
+.import/
+.export/
+export.cfg
+*.translation
+# Godot 4+ specific ignores
+.godot/
+/android/
