@@ -5,10 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://b0vd6grxxdnk6" path="res://assets/Tiles/tile_0023.png" id="3_0lttj"]
 [ext_resource type="Texture2D" uid="uid://whkp5pc65xkl" path="res://assets/Tiles/tile_0022.png" id="4_gjikb"]
 [ext_resource type="Texture2D" uid="uid://b7v4ha1cd8l3c" path="res://assets/Tiles/tile_0021.png" id="5_i2vvo"]
-[ext_resource type="Texture2D" uid="uid://16rxeiu0g8kp" path="res://assets/Tiles/tile_0033.png" id="6_i2vvo"]
 [ext_resource type="Texture2D" uid="uid://b11bluw1nando" path="res://assets/Tiles/tile_0002.png" id="6_vseyj"]
 [ext_resource type="Texture2D" uid="uid://cg2ww55egwshq" path="res://assets/Tiles/tile_0003.png" id="7_6vres"]
-[ext_resource type="Texture2D" uid="uid://by8h7cxl7s5f4" path="res://assets/Tiles/tile_0034.png" id="7_vseyj"]
 [ext_resource type="Texture2D" uid="uid://dynyjho6awh3" path="res://assets/Tiles/tile_0004.png" id="8_4qfh8"]
 [ext_resource type="Texture2D" uid="uid://de8d3r6sb82tf" path="res://assets/Tiles/tile_0005.png" id="9_1r1bg"]
 [ext_resource type="Texture2D" uid="uid://c0xyck0emyds" path="res://assets/Tiles/tile_0020.png" id="10_8o5wg"]
@@ -35,14 +33,6 @@ texture = ExtResource("4_gjikb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l22sv"]
 texture = ExtResource("5_i2vvo")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4qfh8"]
-texture = ExtResource("6_i2vvo")
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r1bg"]
-texture = ExtResource("7_vseyj")
-0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g45su"]
 texture = ExtResource("6_vseyj")
@@ -90,8 +80,6 @@ sources/9 = SubResource("TileSetAtlasSource_mtle3")
 sources/10 = SubResource("TileSetAtlasSource_k6vie")
 sources/11 = SubResource("TileSetAtlasSource_wbu7v")
 sources/12 = SubResource("TileSetAtlasSource_l22sv")
-sources/13 = SubResource("TileSetAtlasSource_4qfh8")
-sources/14 = SubResource("TileSetAtlasSource_1r1bg")
 
 [node name="Map1" type="Node2D" unique_id=2053901344]
 
