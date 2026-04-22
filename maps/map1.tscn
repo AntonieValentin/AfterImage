@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://ckuvlt2u0t5ry" path="res://assets/Tiles/tile_0024.png" id="12_hltnu"]
 [ext_resource type="Script" uid="uid://gq2opvy258c2" path="res://maps/iarba.gd" id="13_o3xq8"]
 [ext_resource type="Script" uid="uid://cl28o1qquhy4v" path="res://maps/camera_2d.gd" id="14_fiknj"]
+[ext_resource type="PackedScene" uid="uid://cw83fpbv25e3h" path="res://player.tscn" id="17_i2vvo"]
+[ext_resource type="PackedScene" uid="uid://bsj561cvl7kjt" path="res://main_menu.tscn" id="18_vseyj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xbqh"]
 texture = ExtResource("1_t45sv")
@@ -77,6 +79,7 @@ texture = ExtResource("12_hltnu")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fo5xs"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7xbqh")
 sources/1 = SubResource("TileSetAtlasSource_52hco")
 sources/2 = SubResource("TileSetAtlasSource_g45su")
@@ -99,7 +102,16 @@ sources/14 = SubResource("TileSetAtlasSource_1r1bg")
 tile_set = SubResource("TileSet_fo5xs")
 script = ExtResource("13_o3xq8")
 
+[node name="Player" parent="." unique_id=2119059682 instance=ExtResource("17_i2vvo")]
+position = Vector2(214, 198)
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1661380838]
-offset = Vector2(400, 200)
+position = Vector2(372, 206)
 zoom = Vector2(2, 2)
 script = ExtResource("14_fiknj")
+
+[node name="Main Menu" parent="." unique_id=377564701 instance=ExtResource("18_vseyj")]
+offset_left = -11.397949
+offset_top = -5.6141357
+offset_right = -11.397949
+offset_bottom = -5.6141357
