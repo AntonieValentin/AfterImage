@@ -10,11 +10,20 @@
 [ext_resource type="Texture2D" uid="uid://cg2ww55egwshq" path="res://assets/Tiles/tile_0003.png" id="7_6vres"]
 [ext_resource type="Texture2D" uid="uid://by8h7cxl7s5f4" path="res://assets/Tiles/tile_0034.png" id="7_vseyj"]
 [ext_resource type="Texture2D" uid="uid://dynyjho6awh3" path="res://assets/Tiles/tile_0004.png" id="8_4qfh8"]
+[ext_resource type="Texture2D" uid="uid://b3mt6i2gixxre" path="res://assets/Tiles/tile_0073.png" id="8_i2vvo"]
 [ext_resource type="Texture2D" uid="uid://de8d3r6sb82tf" path="res://assets/Tiles/tile_0005.png" id="9_1r1bg"]
+[ext_resource type="Texture2D" uid="uid://wwfi438chefj" path="res://assets/Tiles/tile_0128.png" id="9_8o5wg"]
 [ext_resource type="Texture2D" uid="uid://c0xyck0emyds" path="res://assets/Tiles/tile_0020.png" id="10_8o5wg"]
+[ext_resource type="Texture2D" uid="uid://bjqp88tuytts4" path="res://assets/Tiles/tile_0107.png" id="10_fjyoi"]
 [ext_resource type="Texture2D" uid="uid://dqr6yyxpaj7py" path="res://assets/Tiles/tile_0025.png" id="11_fjyoi"]
+[ext_resource type="Texture2D" uid="uid://cvdl40a4qu4km" path="res://assets/Tiles/tile_0108.png" id="11_hltnu"]
 [ext_resource type="Texture2D" uid="uid://ckuvlt2u0t5ry" path="res://assets/Tiles/tile_0024.png" id="12_hltnu"]
+[ext_resource type="Texture2D" uid="uid://c0wo7lp5cinkm" path="res://assets/Tiles/tile_0151.png" id="12_o3xq8"]
 [ext_resource type="Script" uid="uid://gq2opvy258c2" path="res://maps/iarba.gd" id="13_o3xq8"]
+[ext_resource type="Texture2D" uid="uid://bdj8d2qtamhch" path="res://assets/Tiles/tile_0047.png" id="14_8o5wg"]
+[ext_resource type="Texture2D" uid="uid://d1ll37ripoh3u" path="res://assets/Tiles/tile_0087.png" id="15_o3xq8"]
+[ext_resource type="Texture2D" uid="uid://bnjwuamc2jof4" path="res://assets/Tiles/tile_0088.png" id="16_7xbqh"]
+[ext_resource type="Texture2D" uid="uid://chmohagtdfo4m" path="res://assets/Tiles/tile_0150.png" id="17_52hco"]
 [ext_resource type="PackedScene" uid="uid://cw83fpbv25e3h" path="res://player.tscn" id="17_i2vvo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xbqh"]
@@ -50,10 +59,46 @@ texture = ExtResource("7_vseyj")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vseyj"]
+texture = ExtResource("8_i2vvo")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fo5xs"]
+texture = ExtResource("9_8o5wg")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y20uf"]
+texture = ExtResource("10_fjyoi")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jfxcy"]
+texture = ExtResource("11_hltnu")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_67fdc"]
+texture = ExtResource("12_o3xq8")
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g45su"]
 texture = ExtResource("6_vseyj")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjyoi"]
+texture = ExtResource("14_8o5wg")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bqgln"]
+texture = ExtResource("15_o3xq8")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqgbr"]
+texture = ExtResource("16_7xbqh")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_huwpx"]
+texture = ExtResource("17_52hco")
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lka15"]
 texture = ExtResource("7_6vres")
@@ -107,8 +152,17 @@ sources/11 = SubResource("TileSetAtlasSource_wbu7v")
 sources/12 = SubResource("TileSetAtlasSource_l22sv")
 sources/13 = SubResource("TileSetAtlasSource_4qfh8")
 sources/14 = SubResource("TileSetAtlasSource_1r1bg")
+sources/15 = SubResource("TileSetAtlasSource_vseyj")
+sources/16 = SubResource("TileSetAtlasSource_fo5xs")
+sources/17 = SubResource("TileSetAtlasSource_y20uf")
+sources/18 = SubResource("TileSetAtlasSource_jfxcy")
+sources/19 = SubResource("TileSetAtlasSource_67fdc")
+sources/20 = SubResource("TileSetAtlasSource_fjyoi")
+sources/21 = SubResource("TileSetAtlasSource_bqgln")
+sources/22 = SubResource("TileSetAtlasSource_uqgbr")
+sources/23 = SubResource("TileSetAtlasSource_huwpx")
 
-[node name="Map1" type="Node2D" unique_id=2053901344]
+[node name="Game" type="Node2D" unique_id=2053901344]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=499654520]
 tile_set = SubResource("TileSet_fo5xs")
