@@ -27,6 +27,20 @@ func _ready():
 	timp_start = Time.get_ticks_msec() / 1000.0
 
 func _physics_process(delta):
+	#####
+	# Gestionare Înregistrare (Tasta C)
+	if Input.is_action_just_pressed("record"):
+		_toggle_recording()
+
+	# Gestionare Execuție (Tasta E)
+	if Input.is_action_just_pressed("execute"):
+		_spawn_clone()
+
+	# Înregistrarea propriu-zisă
+	if is_recording:
+		_record_frame()
+	#####
+	
 	# Gravitatie
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -42,6 +56,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 	var current_id = tilemap.get_cell_source_id(tilemap.local_to_map(tilemap.to_local(global_position)))
+	print("Stau pe tile-ul cu ID: ", current_id)
 	# Mută personajul
 	move_and_slide()
 	
@@ -87,9 +102,11 @@ func _handle_pickup(coords: Vector2i):
 	if id == ID_COIN:
 		tilemap.erase_cell(coords)
 		coins_session += 1
+		print("Monede: ", coins_session)
 	elif id == ID_CIUPERCA:
 		tilemap.erase_cell(coords)
 		ciuperci_session += 1
+		print("Ciuperci: ", ciuperci_session)
 	elif id == ID_TRAMBULINA:
 		velocity.y = jump_velocity * 1.5
 		
@@ -138,3 +155,37 @@ func _nivel_terminat():
 	GameManager.last_clone = clone_folosite
 	
 	get_tree().change_scene_to_file("res://EndGame.tscn")
+	
+# Configurații clonare
+const CLONE_SCENE = preload("res://clone.tscn")
+var is_recording: bool = false
+var recording_data: Array = []
+
+func _toggle_recording() -> void:
+	is_recording = !is_recording
+	if is_recording:
+		recording_data.clear()
+		modulate = Color(1.5, 0.5, 0.5) # Feedback vizual (roșiatic)
+		print("Înregistrare pornită...")
+	else:
+		modulate = Color(1, 1, 1) # Revenire la normal
+		print("Înregistrare oprită. Cadre salvate: ", recording_data.size())
+
+func _record_frame() -> void:
+	var frame = {
+		"pos": global_position,
+		# Verificăm dacă ai un Sprite2D pentru a salva direcția (stânga/dreapta)
+		"flip": $Sprite2D.flip_h if has_node("Sprite2D") else false,
+		"anim": "" # Lăsăm gol momentan, deoarece Player-ul nu are animații
+	}
+	recording_data.append(frame)
+
+func _spawn_clone() -> void:
+	if recording_data.is_empty():
+		print("EROARE: Nu am ce să redau!")
+		return
+		
+	var clone = CLONE_SCENE.instantiate()
+	clone.playback_data = recording_data.duplicate()
+	get_parent().add_child(clone)
+	print("Clona a fost adăugată în scenă la: ", clone.global_position)
