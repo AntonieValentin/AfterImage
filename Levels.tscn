@@ -190,8 +190,8 @@ func _ready() -> void:
 
 func setup_level(numar_nivel: int):
 	match numar_nivel:
-		1: generate_fixed_level(150, SEED_NIVEL_1)
-		2: generate_fixed_level(150, SEED_NIVEL_2)
+		1: generate_fixed_level(1500, SEED_NIVEL_1)
+		2: generate_fixed_level(2500, SEED_NIVEL_2)
 		3: generate_concatenated_level()
 
 func generate_fixed_level(lungime: int, s_id: int):
@@ -263,7 +263,6 @@ func _build_platforms_and_items(lungime: int, offset_x: int = 0):
 	# map_to_local returnează centrul tile-ului în coordonate locale
 	# to_global îl transformă în coordonate de lume pe care Player-ul le înțelege
 	usa_world_pos = to_global(map_to_local(Vector2i(usa_x, NIVEL_PODEA - 1)))
-	print(\"Usa a fost generata la coordonatele globale: \", usa_world_pos)
 
 func _spawn_box(tile_x: int, tile_y: int):
 	var box = BOX_SCENE.instantiate()

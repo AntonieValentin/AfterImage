@@ -1,30 +1,30 @@
 extends Node
 
-# --- DATE UTILIZATOR ȘI SALVARE ---
+	# --- DATE UTILIZATOR ȘI SALVARE ---
 var player_name: String = "Guest" # Numele implicit care va fi cerut în Main Menu
 var coins_total: int = 0
 
-# --- SETĂRI DIFICULTATE ---
+	# --- SETĂRI DIFICULTATE ---
 var is_noob_mode: bool = true
 
-# Parametri Noob
+	# Parametri Noob
 const NOOB_CLONE_DURATION = 8.0
 const NOOB_CLONE_BONUS = 3
 const NOOB_JUMP_MULTIPLIER = 1.3
 
-# Parametri Pro  
+	# Parametri Pro  
 const PRO_CLONE_DURATION = 6.0
 const PRO_CLONE_BONUS = 0
 const PRO_JUMP_MULTIPLIER = 1.0
 
-# --- STATISTICI SESIUNE (Pentru EndGame) ---
+	# --- STATISTICI SESIUNE (Pentru EndGame) ---
 var nivel_curent: int = 1
 var last_coins: int = 0
 var last_timp: float = 0.0
 var last_ciuperci: int = 0
 var last_clone: int = 0
 
-# --- FUNCȚII ACCES ---
+	# --- FUNCȚII ACCES ---
 func get_clone_duration() -> float:
 	return NOOB_CLONE_DURATION if is_noob_mode else PRO_CLONE_DURATION
 
@@ -36,12 +36,10 @@ func get_jump_multiplier() -> float:
 
 func set_difficulty(noob: bool):
 	is_noob_mode = noob
-	print("Dificultate setată pe: ", "NOOB" if noob else "PRO")
 
-# --- LOGICĂ NUME ---
+	# --- LOGICĂ NUME ---
 func set_player_name(new_name: String):
 	if new_name.strip_edges() == "":
 		player_name = "Guest"
 	else:
 		player_name = new_name
-	print("Utilizator curent: ", player_name)
