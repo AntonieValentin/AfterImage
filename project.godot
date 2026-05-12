@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="AfterImage"
-run/main_scene="uid://7n74ci7txe53"
+run/main_scene="uid://ds14fgv6nyeay"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://kvo1swtv7xva"
+SaveManager="*uid://boyvvtisbkyjx"
 
 [input]
 

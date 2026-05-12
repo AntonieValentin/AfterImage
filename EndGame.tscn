@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d3xwm2cmmordy"]
+
+[ext_resource type="Script" uid="uid://cdkocskk8eami" path="res://EndGame.gd" id="1_47ayc"]
+
+[node name="EndGame" type="Control" unique_id=693673571]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_47ayc")
