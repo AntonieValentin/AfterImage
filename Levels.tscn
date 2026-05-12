@@ -190,8 +190,8 @@ func _ready() -> void:
 
 func setup_level(numar_nivel: int):
 	match numar_nivel:
-		1: generate_fixed_level(150, SEED_NIVEL_1)
-		2: generate_fixed_level(150, SEED_NIVEL_2)
+		1: generate_fixed_level(1500, SEED_NIVEL_1)
+		2: generate_fixed_level(2500, SEED_NIVEL_2)
 		3: generate_concatenated_level()
 
 func generate_fixed_level(lungime: int, s_id: int):
