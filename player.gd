@@ -23,11 +23,19 @@ var ciuperci_session: int = 0
 var clone_folosite: int = 0
 var timp_start: float = 0.0
 
+var pause_menu: CanvasLayer
+var coins_label: Label
+var ciuperci_label: Label
+
 func _ready():
 	timp_start = Time.get_ticks_msec() / 1000.0
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+	_create_pause_menu()
 
 func _physics_process(delta):
 	#####
+	if Input.is_action_just_pressed("ui_cancel"):
+		_toggle_pause()
 	# Gestionare Înregistrare (Tasta C)
 	if Input.is_action_just_pressed("record"):
 		_toggle_recording()
@@ -56,7 +64,6 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 	var current_id = tilemap.get_cell_source_id(tilemap.local_to_map(tilemap.to_local(global_position)))
-	print("Stau pe tile-ul cu ID: ", current_id)
 	# Mută personajul
 	move_and_slide()
 	
@@ -189,3 +196,83 @@ func _spawn_clone() -> void:
 	clone.playback_data = recording_data.duplicate()
 	get_parent().add_child(clone)
 	print("Clona a fost adăugată în scenă la: ", clone.global_position)
+	
+func _create_pause_menu():
+	pause_menu = CanvasLayer.new()
+	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_menu.visible = false
+	add_child(pause_menu)
+
+	var bg = ColorRect.new()
+	bg.color = Color(0, 0, 0, 0.6)
+	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	pause_menu.add_child(bg)
+
+	var vbox = VBoxContainer.new()
+	vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	vbox.add_theme_constant_override("separation", 20)
+	vbox.offset_left = -150
+	vbox.offset_right = 150
+	vbox.offset_top = -180
+	vbox.offset_bottom = 180
+	pause_menu.add_child(vbox)
+
+	var title = Label.new()
+	title.text = "⏸ PAUSED"
+	title.add_theme_font_size_override("font_size", 42)
+	title.add_theme_color_override("font_color", Color("ffd700"))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(title)
+
+	vbox.add_child(HSeparator.new())
+
+	coins_label = Label.new()
+	coins_label.text = "🪙 Monede: 0"
+	coins_label.add_theme_font_size_override("font_size", 26)
+	coins_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(coins_label)
+
+	ciuperci_label = Label.new()
+	ciuperci_label.text = "🍄 Ciuperci: 0"
+	ciuperci_label.add_theme_font_size_override("font_size", 26)
+	ciuperci_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(ciuperci_label)
+
+	vbox.add_child(HSeparator.new())
+
+	var btn_resume = Button.new()
+	btn_resume.text = "▶ RESUME"
+	btn_resume.custom_minimum_size = Vector2(250, 60)
+	btn_resume.process_mode = Node.PROCESS_MODE_ALWAYS
+	btn_resume.pressed.connect(_on_resume)
+	vbox.add_child(btn_resume)
+
+	var btn_menu = Button.new()
+	btn_menu.text = "🏠 MAIN MENU"
+	btn_menu.custom_minimum_size = Vector2(250, 60)
+	btn_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	btn_menu.pressed.connect(_on_exit_to_menu)
+	vbox.add_child(btn_menu)
+
+	var btn_quit = Button.new()
+	btn_quit.text = "✕ QUIT"
+	btn_quit.custom_minimum_size = Vector2(250, 60)
+	btn_quit.process_mode = Node.PROCESS_MODE_ALWAYS
+	btn_quit.pressed.connect(func(): get_tree().quit())
+	vbox.add_child(btn_quit)
+
+func _toggle_pause():
+	var is_paused = not get_tree().paused
+	get_tree().paused = is_paused
+	pause_menu.visible = is_paused
+	if is_paused:
+		coins_label.text = "🪙 Monede: %d" % coins_session
+		ciuperci_label.text = "🍄 Ciuperci: %d" % ciuperci_session
+
+func _on_resume():
+	get_tree().paused = false
+	pause_menu.visible = false
+
+func _on_exit_to_menu():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
