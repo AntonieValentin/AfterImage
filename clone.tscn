@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://dop2yfbut0anj" path="res://clone.gd" id="1_wmkvi"]
 [ext_resource type="Texture2D" uid="uid://c7q1d5p2w8kej" path="res://assets/Tiles/Characters/tile_0000.png" id="2_cqhld"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqhld"]
+
 [node name="Clone" type="CharacterBody2D" unique_id=197909637]
 script = ExtResource("1_wmkvi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1412088460]
 texture = ExtResource("2_cqhld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=847868053]
+shape = SubResource("RectangleShape2D_cqhld")

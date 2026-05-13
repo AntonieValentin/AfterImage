@@ -1,18 +1,17 @@
 extends Control
 
 func _ready():
-	# 1. LOGICA DE SALVARE (Trebuie să fie PRIMA linie)
-	# Căutăm profilul (ex: Alex) în listă și îl încărcăm
+	# cautam profilul jucatorului si il incarcam
 	SaveManager.login_user(GameManager.player_name)
 	
-	# Adăugăm monedele câștigate acum la balanța lui din JSON
+	# adaugam monezile adunate in runda asta la total
 	SaveManager.add_coins(GameManager.last_coins)
 	
-	# Deblocăm nivelul următor în fișierul lui de salvare
+	# deblocam nivelul urmator in fisierul de save
 	var id_nivel_urmator = GameManager.nivel_curent + 1
 	SaveManager.deblocheaza_nivel(id_nivel_urmator)
 
-	# --- CONFIGURARE UI (Codul tău, optimizat) ---
+	# setam meniul pe tot ecranul
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
 	var vbox = VBoxContainer.new()
@@ -26,7 +25,7 @@ func _ready():
 	title.add_theme_font_size_override("font_size", 48)
 	vbox.add_child(title)
 	
-	# Opțional: Afișăm cine a terminat (Alex / Guest)
+	# afisam numele celui care a jucat
 	var name_label = Label.new()
 	name_label.text = "Jucător: %s" % GameManager.player_name
 	name_label.add_theme_font_size_override("font_size", 24)
@@ -48,14 +47,13 @@ func _ready():
 	vbox.add_child(ciuperci_label)
 	
 	var balanta_label = Label.new()
-	# Acum get_balanta() va returna suma corectă a profilului curent
+	# luam balanta totala actualizata din savemanager
 	balanta_label.text = "Balanță totală: %d coins" % SaveManager.get_balanta()
 	balanta_label.add_theme_font_size_override("font_size", 24)
 	vbox.add_child(balanta_label)
 	
-	# --- BUTON NIVEL URMATOR ---
+	# verificam daca mai exista nivele si daca sunt deblocate
 	var nivel_urmator = GameManager.nivel_curent + 1
-	# Verificăm dacă nivelul următor există (maxim 3) ȘI dacă este deblocat în SaveManager
 	if nivel_urmator <= 3 and nivel_urmator <= SaveManager.get_nivel_deblocat():
 		var btn_next = Button.new()
 		btn_next.text = "Nivel %d" % nivel_urmator
@@ -72,9 +70,10 @@ func _ready():
 	vbox.add_child(btn_menu)
 
 func _on_next_level():
-	# Creștem nivelul și reîncărcăm scena de nivele
+	# mergem la urmatorul nivel
 	GameManager.nivel_curent += 1
 	get_tree().change_scene_to_file("res://Levels.tscn")
 
 func _on_menu():
+	# ne intoarcem la meniul principal
 	get_tree().change_scene_to_file("res://MainMenu.tscn")
