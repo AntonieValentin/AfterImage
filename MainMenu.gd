@@ -3,6 +3,7 @@ extends Control
 var hbox_levels: HBoxContainer
 
 func _ready():
+	# setam meniul pe tot ecranul
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	
 	var vbox = VBoxContainer.new()
@@ -11,7 +12,7 @@ func _ready():
 	vbox.position = Vector2(50, 50)
 	add_child(vbox)
 
-	# --- NUME JUCĂTOR ---
+	# nume jucator
 	var user_display = Label.new()
 	user_display.text = GameManager.player_name.to_upper()
 	user_display.add_theme_font_size_override("font_size", 42)
@@ -21,13 +22,13 @@ func _ready():
 	name_edit.placeholder_text = "SCRIE NUMELE PENTRU SALVARE..."
 	name_edit.custom_minimum_size = Vector2(350, 45)
 	name_edit.text = GameManager.player_name if GameManager.player_name != "Guest" else ""
+	# actualizam textul in timp ce utilizatorul scrie
 	name_edit.text_changed.connect(func(new_name):
 		GameManager.set_player_name(new_name)
 		user_display.text = GameManager.player_name.to_upper()
-	# ← ȘTERS login_user de aici
 	)
 
-# Login doar când termini de scris (Enter sau click în altă parte)
+# logare cand se apasa enter sau se schimba focusul
 	name_edit.text_submitted.connect(func():
 		SaveManager.login_user(GameManager.player_name)
 		_rebuild_level_buttons()
@@ -39,7 +40,7 @@ func _ready():
 	)
 	vbox.add_child(name_edit)
 
-	# --- DIFICULTATE ---
+	# dificultate
 	var start_label = Label.new()
 	start_label.text = "START GAME"
 	start_label.add_theme_font_size_override("font_size", 32)
@@ -62,7 +63,7 @@ func _ready():
 	btn_pro.pressed.connect(_on_pro_pressed)
 	hbox_diff.add_child(btn_pro)
 
-	# --- SELECTARE NIVEL ---
+	# selectare nivel
 	var level_label = Label.new()
 	level_label.text = "SELECT LEVEL"
 	level_label.add_theme_font_size_override("font_size", 28)
@@ -73,11 +74,11 @@ func _ready():
 	hbox_levels.add_theme_constant_override("separation", 15)
 	vbox.add_child(hbox_levels)
 
-	# Încarcă profilul curent înainte de a construi butoanele
+	# incarcam profilul inainte sa apara butoanele
 	SaveManager.login_user(GameManager.player_name)
 	_rebuild_level_buttons()
 
-	# --- QUIT ---
+	# buton iesire
 	var btn_quit = Button.new()
 	btn_quit.text = "QUIT"
 	btn_quit.pressed.connect(func(): get_tree().quit())
@@ -85,14 +86,17 @@ func _ready():
 
 
 func _rebuild_level_buttons():
+	# curatam lista de butoane
 	for child in hbox_levels.get_children():
 		child.queue_free()
 
 	var nivel_deblocat = SaveManager.get_nivel_deblocat()
 
+	# cream butoane pentru fiecare nivel de la 1 la 3
 	for i in range(1, 4):
 		var btn_level = Button.new()
 		btn_level.custom_minimum_size = Vector2(120, 65)
+		# verificam daca nivelul este accesibil
 		if i <= nivel_deblocat:
 			btn_level.text = "LEVEL %d" % i
 			btn_level.pressed.connect(_on_level_pressed.bind(i))
@@ -109,13 +113,16 @@ func _on_pro_pressed():
 	GameManager.set_difficulty(false)
 
 func _on_level_pressed(level: int):
+	# pornim nivelul selectat
 	GameManager.nivel_curent = level
 	get_tree().change_scene_to_file("res://Levels.tscn")
 
 func _on_level_locked(level: int):
+	# afisam mesaj daca nivelul este blocat
 	_show_notification("⛔ LEVEL %d IS LOCKED!" % level)
 
 func _show_notification(message: String):
+	# eliminam notificarea anterioara
 	var old = get_node_or_null("Notification")
 	if old:
 		old.queue_free()
@@ -129,6 +136,7 @@ func _show_notification(message: String):
 	notif.position.y -= 80
 	add_child(notif)
 
+	# stergem mesajul automat dupa 2 secunde
 	var timer = get_tree().create_timer(2.0)
 	timer.timeout.connect(func():
 		if is_instance_valid(notif):
